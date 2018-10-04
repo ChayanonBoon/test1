@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Current KKU Activities</title>
+    <style>
+        #demo {
+            margin: auto;
+            padding-left: 40px;
+            text-align: left;
+            font-size: 20px;
+        }
+        #num{
+            margin: auto;
+            padding-left: 20px;
+            text-align: left;
+            font-size: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Current KKU Activities</h1>
+    <p id="demo"></p>
+    <script>
+        var requestURL = 'http://localhost:8000/Desktop/Lab7/activities.json';
+        var request = new XMLHttpRequest();
+        request.open('GET', requestURL);
+        request.send();
+        request.responseType = 'json';
+        request.onload = function () {
+            var superActivities = request.response;
+            showActivities(superActivities);
+        }
+        function showActivities(jsonObj) {
+            var activities = jsonObj['activities'];
+            for (var i = 0; i < activities.length; i++) {
+                document.getElementById("demo").innerHTML +=
+                 [i + 1] + '.Date: ' + activities[i].dateSt + ' time: ' + activities[i].timeSt + ' if interested, call ' + activities[i].contact.phone + '<br>'
+                  + '<p id="num">' + '<a href="' + activities[i].url + '">' + activities[i].title + '</a>' + '<br>'
+                    + '<img src="' + activities[i].image + '" width="50%" height="50%">' + '</img>'+ '</p>' + "<br>" ;
+
+            }
+        }
+    </script>
+
+</body>
+
+</html>
