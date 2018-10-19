@@ -4,48 +4,218 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Current KKU Activities</title>
+    <title>Network</title>
     <style>
-        #demo {
+        table {
+            border-collapse: collapse;
+            border: 2px solid rgb(200, 200, 200);
+            letter-spacing: 1px;
+            font-size: 0.8rem;
+            max-width: 500px;
             margin: auto;
-            padding-left: 40px;
-            text-align: left;
-            font-size: 20px;
+            margin-top: 20px;
         }
-        #num{
-            margin: auto;
-            padding-left: 20px;
-            text-align: left;
-            font-size: 20px;
+
+        td,tr {
+            border: 1px solid rgb(190, 190, 190);
+            padding: 10px 20px;
         }
+
+        td {
+            text-align: center;
+        }
+        .input{
+            margin-top: 10px;
+            width: 900px;
+            height: 200px;
+            background-color: black;
+            color: aliceblue;
+        }
+        .div{
+            margin: 30px;
+            margin-left: 20%;
+        }
+        .divcolor{
+            background-color: black;
+            color: white;
+            width: 800px;
+        }
+        .img{
+            text-align: center;
+            margin-left: 400px;
+        }
+        .column {
+            float: left;
+            width: 45%;
+            padding: 10px;
+}
+
+
+    .row:after {
+         content: "";
+        display: table;
+        clear: both;
+}
+
     </style>
+
 </head>
 
 <body>
-    <h1>Current KKU Activities</h1>
-    <p id="demo"></p>
-    <script>
-        var requestURL = 'http://localhost:8000/Desktop/Lab7/activities.json';
-        var request = new XMLHttpRequest();
-        request.open('GET', requestURL);
-        request.send();
-        request.responseType = 'json';
-        request.onload = function () {
-            var superActivities = request.response;
-            showActivities(superActivities);
-        }
-        function showActivities(jsonObj) {
-            var activities = jsonObj['activities'];
-            for (var i = 0; i < activities.length; i++) {
-                document.getElementById("demo").innerHTML +=
-                 [i + 1] + '.Date: ' + activities[i].dateSt + ' time: ' + activities[i].timeSt + ' if interested, call ' + activities[i].contact.phone + '<br>'
-                  + '<p id="num">' + '<a href="' + activities[i].url + '">' + activities[i].title + '</a>' + '<br>'
-                    + '<img src="' + activities[i].image + '" width="50%" height="50%">' + '</img>'+ '</p>' + "<br>" ;
+    <div>
+        <table>
+            <tr>
+                <td>Name PC</td>
+                <td>IP Address</td>
+                <td>MAC Address</td>
+                <td>Port</td>
+            </tr>
+            <tr>
+                <td>PC A</td>
+                <td>192.168.0.1</td>
+                <td>12:34:56:78:90:AB</td>
+                <td>f0/1</td>
+            </tr>
+            <tr>
+                <td>PC B</td>
+                <td>192.168.0.2</td>
+                <td>13:50:40:18:95:AC</td>
+                <td>f0/2</td>
+            </tr>
+            <tr>
+                <td>PC C</td>
+                <td>192.168.0.3</td>
+                <td>14:67:28:29:80:BF</td>
+                <td>f0/3</td>
+            </tr>
+        </table>
+    </div>
 
+    <div class="div">
+        <p>Source Network Address: <input type="text" id="source">
+            to Destination Network Address: <input type="text" id="destination"> <button>Ping</button>  </p> 
+            <p><img class="img"></p>
+          
+    </div>
+ 
+      
+  
+    
+
+    <div class="row">
+        <div class="column">
+            <h2>Forwarding Table </h2>
+            <table id="forwarding">
+                <td>MAC Addres</td>
+                <td>Port</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="column">
+            <h2>package</h2>
+            <table id="divcolor">
+
+                <tr>
+                    <td>Destination Network Address</td>
+                    <td>Source Network Address</td>
+                    <td>Destination Physical address</td>
+                    <td>Source Physical address</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        var btn = document.querySelector('button');
+        var Source = document.querySelector('#source');
+        var Destination = document.querySelector('#destination');
+
+        var pc = '{ "employees" : [' + '{ "IP":"192.168.0.1" , "MAC":"12:34:56:78:90:AB" },' +
+            '{"IP":"192.168.0.2","MAC":"13:50:40:18:95:AC" },' +
+            '{"IP":"192.168.0.3","MAC":"14:67:28:29:80:BF" } ]}';
+        var port = ' {"emplo" : [' + '{ "port":"f0/1" , "MAC":"12:34:56:78:90:AB" },' +
+            '{"port":"f0/2","MAC":"13:50:40:18:95:AC" },' +
+            '{"port":"f0/3","MAC":"14:67:28:29:80:BF"}]}';
+
+
+        btn.addEventListener('click', art);
+        obj = JSON.parse(pc);
+        obj2 = JSON.parse(port);
+
+        function art() {
+            if (Source.value == "" && Destination.value == "") {
+                document.getElementById("divcolor").innerHTML += '<tr><td>' + "unreachable"+ "</td>" + '<td>' + "unreachable" + '</td>' + '<td>' + "unreachable"+ '</td>' + '<td>' + "unreachable"+ '</td></tr>';
+                var img = document.querySelector('img');
+                img.style.width = '50px';
+                img.style.height = '50px';
+                img.style.textAlign = 'center';
+                img.setAttribute('src', "wvekk.png");
+            }
+            else {
+                var i;
+                var j;
+                var k;
+                if (Source.value == "192.168.0.1" && Destination.value == "192.168.0.2") {
+                    i = 0;
+                    j = 1;
+                    k = 1;
+                }
+                else if (Source.value == "192.168.0.1" && Destination.value == "192.168.0.3") {
+                    i = 0;
+                    j = 2;
+                    k = 2;
+                }
+                else if (Source.value == "192.168.0.1" && Destination.value == "192.168.0.1") {
+                    i = 0;
+                    j = 0;
+                    k = 0;
+                }
+
+                else if (Source.value == "192.168.0.2" && Destination.value == "192.168.0.1") {
+                    i = 1;
+                    j = 0;
+                    k = 0;
+                }
+                else if (Source.value == "192.168.0.2" && Destination.value == "192.168.0.3") {
+                    i = 1;
+                    j = 2;
+                    k = 2;
+                }
+                else if (Source.value == "192.168.0.2" && Destination.value == "192.168.0.2") {
+                    i = 1;
+                    j = 1;
+                    k = 1;
+                }
+
+                else if (Source.value == "192.168.0.3" && Destination.value == "192.168.0.1") {
+                    i = 2;
+                    j = 0;
+                    k = 0;
+                }
+                else if (Source.value == "192.168.0.3" && Destination.value == "192.168.0.2") {
+                    i = 2;
+                    j = 1;
+                    k = 1;
+                }
+                else if (Source.value == "192.168.0.3" && Destination.value == "192.168.0.3") {
+                    i = 2;
+                    j = 2;
+                    k = 2;
+                }
+                document.getElementById("divcolor").innerHTML += '<tr><td>' + obj.employees[j].IP + "</td>" + '<td>' + obj.employees[i].IP + '</td>' + '<td>' + obj.employees[j].MAC + '</td>' + '<td>' + obj.employees[i].MAC + '</td></tr>';
+
+                document.getElementById("forwarding").innerHTML += '<tr><td>' + obj2.emplo[i].MAC + '</td> ' + '<td>' + obj2.emplo[i].port + '</td></tr>' + '<tr><td>' + obj2.emplo[k].MAC + '</td> ' + '<td>' + obj2.emplo[k].port + '</td></tr>';
+                var list = document.getElementById("forwarding");
+                setTimeout(function(){  list.removeChild(list.childNodes[2]);  }, 5000);
+                var img = document.querySelector('img');
+                img.style.width = '50px';
+                img.style.height = '50px';
+                img.style.textAlign = 'center';
+                img.setAttribute('src', "ok.png");               
             }
         }
     </script>
-
 </body>
 
 </html>
