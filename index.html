@@ -132,64 +132,87 @@
         var pca = document.querySelector('#pca');
         var pcb = document.querySelector('#pcb');
         var pcc = document.querySelector('#pcc');
-        var macpca = document.querySelector('#macpca').value;
-        var macpcb = document.querySelector('#macpcb').value;
-        var macpcc = document.querySelector('#macpcc').value;
-        var porta = document.querySelector('#porta').value;
-        var portb = document.querySelector('#portb').value;
-        var portc = document.querySelector('#portc').value;
+        var macpca = document.querySelector('#macpca');
+        var macpcb = document.querySelector('#macpcb');
+        var macpcc = document.querySelector('#macpcc');
+        var porta = document.querySelector('#porta');
+        var portb = document.querySelector('#portb');
+        var portc = document.querySelector('#portc');
 
-        btn2.addEventListener('click', art);
-       
-        function art() {
-            if(Source.value != pca.value ){
-                imgFalse();
+        btn2.addEventListener('click', checkNumber);
+        function checkNumber(e) {
+            var checkip = /^[192]+[.]+[168]+[.]+[0].[1-9]+$/;
+            if (!pca.value.match(checkip)) {
+                alert("IP PC A: You must enter the IP Address correctly Ex : 192.168.0.[0-9]");
+                return false;
             }
-            if(Source.value != pcb.value ){
-                imgFalse();
+            if (!pcb.value.match(checkip)) {
+                alert("IP PC B: You must enter the IP Address correctly Ex : 192.168.0.[0-9]");
+                return false;
             }
-            if(Source.value != pcc.value ){
-                imgFalse();
+            if (!pcc.value.match(checkip)) {
+                alert("IP PC C: You must enter the IP Address correctly Ex : 192.168.0.[0-9]");
+                return false;
             }
-            if(Destination.value != pca.value ){
-                imgFalse();
+            
+            if(porta.value == portb.value || portb.value == portc.value || porta.value == portc.value){
+                alert("Duplicate port");
+                return false;
             }
-            if(Destination.value != pcb.value ){
-                imgFalse();
+            else {
+                art();
             }
-            if(Destination.value != pcc.value ){
-                imgFalse();
-            }
-            if(Source.value == pca.value && Destination.value == pca.value){
-                art2();
-            }
-            if(Source.value == pca.value && Destination.value == pcb.value){
-                art2();
-            }
-            if(Source.value == pca.value && Destination.value == pcc.value){
-                art2();
-            }
-            if(Source.value == pcb.value && Destination.value == pca.value){
-                art2();
-            }
-            if(Source.value == pcb.value && Destination.value == pcb.value){
-                art2();
-            }
-            if(Source.value == pcb.value && Destination.value == pcc.value){
-                art2();
-            }
-            if(Source.value == pcc.value && Destination.value == pca.value){
-                art2();
-            }
-            if(Source.value == pcc.value && Destination.value == pcb.value){
-                art2();
-            }
-            if(Source.value == pcc.value && Destination.value == pcc.value){
-                art2();
-            }
-           
+            
         }
-        
+        function art() {
+            if (Source.value != pca.value) {
+                imgFalse();
+            }
+            if (Source.value != pcb.value) {
+                imgFalse();
+            }
+            if (Source.value != pcc.value) {
+                imgFalse();
+            }
+            if (Destination.value != pca.value) {
+                imgFalse();
+            }
+            if (Destination.value != pcb.value) {
+                imgFalse();
+            }
+            if (Destination.value != pcc.value) {
+                imgFalse();
+            }
+            if (Source.value == pca.value && Destination.value == pca.value) {
+                art2();
+            }
+            if (Source.value == pca.value && Destination.value == pcb.value) {
+                art2();
+            }
+            if (Source.value == pca.value && Destination.value == pcc.value) {
+                art2();
+            }
+            if (Source.value == pcb.value && Destination.value == pca.value) {
+                art2();
+            }
+            if (Source.value == pcb.value && Destination.value == pcb.value) {
+                art2();
+            }
+            if (Source.value == pcb.value && Destination.value == pcc.value) {
+                art2();
+            }
+            if (Source.value == pcc.value && Destination.value == pca.value) {
+                art2();
+            }
+            if (Source.value == pcc.value && Destination.value == pcb.value) {
+                art2();
+            }
+            if (Source.value == pcc.value && Destination.value == pcc.value) {
+                art2();
+            }
+
+        }
+
         function imgFalse() {
             var img = document.querySelector('img');
             img.style.width = '50px';
@@ -215,71 +238,71 @@
                     if (Source.value == pca.value && Destination.value == pca.value) {
                         des = Destination.value;
                         sour = Source.value;
-                        macdes = macpca;
-                        macsour = macpca;
-                        port = porta;
+                        macdes = macpca.value;
+                        macsour = macpca.value;
+                        port = porta.value;
                     }
                     else if (Source.value == pca.value && Destination.value == pcb.value) {
                         des = Destination.value;
                         sour = Source.value;
-                        macdes = macpcb;
-                        macsour = macpca;
-                        port = portb;
+                        macdes = macpcb.value;
+                        macsour = macpca.value;
+                        port = portb.value;
                     }
                     else if (Source.value == pca.value && Destination.value == pcc.value) {
                         des = Destination.value;
                         sour = Source.value;
-                        macdes = macpcc;
-                        macsour = macpca;
-                        port = portc;
+                        macdes = macpcc.value;
+                        macsour = macpca.value;
+                        port = portc.value;
                     }
                     else if (Source.value == pcb.value && Destination.value == pca.value) {
                         des = Destination.value;
                         sour = Source.value;
-                        macdes = macpcb;
-                        macsour = macpca;
-                        port = porta;
+                        macdes = macpcb.value;
+                        macsour = macpca.value;
+                        port = porta.value;
                     }
                     else if (Source.value == pcb.value && Destination.value == pcb.value) {
                         des = Destination.value;
                         sour = Source.value;
-                        macdes = macpcb;
-                        macsour = macpcb;
-                        port = portb;
+                        macdes = macpcb.value;
+                        macsour = macpcb.value;
+                        port = portb.value;
                     }
                     else if (Source.value == pcb.value && Destination.value == pcc.value) {
                         des = Destination.value;
                         sour = Source.value;
-                        macdes = macpcb;
-                        macsour = macpcc;
-                        port = portc;
+                        macdes = macpcb.value;
+                        macsour = macpcc.value;
+                        port = portc.value;
                     }
                     else if (Source.value == pcc.value && Destination.value == pca.value) {
                         des = Destination.value;
                         sour = Source.value;
-                        macdes = macpcc;
-                        macsour = macpca;
-                        port = porta;
+                        macdes = macpcc.value;
+                        macsour = macpca.value;
+                        port = porta.value;
                     }
                     else if (Source.value == pcc.value && Destination.value == pcb.value) {
                         des = Destination.value;
                         sour = Source.value;
-                        macdes = macpcc;
-                        macsour = macpcb;
-                        port = portb;
+                        macdes = macpcc.value;
+                        macsour = macpcb.value;
+                        port = portb.value;
                     }
                     else if (Source.value == pcc.value && Destination.value == pcc.value) {
                         des = Destination.value;
                         sour = Source.value;
-                        macdes = macpcc;
-                        macsour = macpcc;
-                        port = portc;
+                        macdes = macpcc.value;
+                        macsour = macpcc.value;
+                        port = portc.value;
                     }
                     document.getElementById("divcolor").innerHTML += '<tr><td>' + des + "</td>" + '<td>' + sour + '</td>' + '<td>' + macdes + '</td>' + '<td>' + macsour + '</td></tr>';
                     document.getElementById("forwarding").innerHTML += '<tr><td>' + macdes + '</td> ' + '<td>' + port + '</td></tr>';
                     var list = document.getElementById("forwarding");
                     setTimeout(function () { list.removeChild(list.childNodes[2]); }, 5000);
-                    imgTrue() 
+                    imgTrue()
                 }
 
                 else {
