@@ -139,7 +139,71 @@
         var portb = document.querySelector('#portb').value;
         var portc = document.querySelector('#portc').value;
 
-        btn2.addEventListener('click', art2);
+        btn2.addEventListener('click', art);
+       
+        function art() {
+            if(Source.value != pca.value ){
+                imgFalse();
+            }
+            if(Source.value != pcb.value ){
+                imgFalse();
+            }
+            if(Source.value != pcc.value ){
+                imgFalse();
+            }
+            if(Destination.value != pca.value ){
+                imgFalse();
+            }
+            if(Destination.value != pcb.value ){
+                imgFalse();
+            }
+            if(Destination.value != pcc.value ){
+                imgFalse();
+            }
+            if(Source.value == pca.value && Destination.value == pca.value){
+                art2();
+            }
+            if(Source.value == pca.value && Destination.value == pcb.value){
+                art2();
+            }
+            if(Source.value == pca.value && Destination.value == pcc.value){
+                art2();
+            }
+            if(Source.value == pcb.value && Destination.value == pca.value){
+                art2();
+            }
+            if(Source.value == pcb.value && Destination.value == pcb.value){
+                art2();
+            }
+            if(Source.value == pcb.value && Destination.value == pcc.value){
+                art2();
+            }
+            if(Source.value == pcc.value && Destination.value == pca.value){
+                art2();
+            }
+            if(Source.value == pcc.value && Destination.value == pcb.value){
+                art2();
+            }
+            if(Source.value == pcc.value && Destination.value == pcc.value){
+                art2();
+            }
+           
+        }
+        
+        function imgFalse() {
+            var img = document.querySelector('img');
+            img.style.width = '50px';
+            img.style.height = '50px';
+            img.style.textAlign = 'center';
+            img.setAttribute('src', "wvekk.png");
+        }
+        function imgTrue() {
+            var img = document.querySelector('img');
+            img.style.width = '50px';
+            img.style.height = '50px';
+            img.style.textAlign = 'center';
+            img.setAttribute('src', "ok.png");;
+        }
         function art2() {
             if (Source.value != '' || Destination != '') {
                 var des;
@@ -215,31 +279,16 @@
                     document.getElementById("forwarding").innerHTML += '<tr><td>' + macdes + '</td> ' + '<td>' + port + '</td></tr>';
                     var list = document.getElementById("forwarding");
                     setTimeout(function () { list.removeChild(list.childNodes[2]); }, 5000);
-                    var img = document.querySelector('img');
-                    img.style.width = '50px';
-                    img.style.height = '50px';
-                    img.style.textAlign = 'center';
-                    img.setAttribute('src', "ok.png");
-
+                    imgTrue() 
                 }
 
                 else {
-                    var img = document.querySelector('img');
-                    img.style.width = '50px';
-                    img.style.height = '50px';
-                    img.style.textAlign = 'center';
-                    img.setAttribute('src', "wvekk.png");
-
+                    imgFalse();
                 }
 
             }
             else {
-                var img = document.querySelector('img');
-                img.style.width = '50px';
-                img.style.height = '50px';
-                img.style.textAlign = 'center';
-                img.setAttribute('src', "wvekk.png");
-                
+                imgFalse();
             }
         }
     </script>
