@@ -141,35 +141,13 @@
 
         btn2.addEventListener('click', art2);
         function art2() {
-            if (Source.value == '' || Destination == '') {
-                var img = document.querySelector('img');
-                img.style.width = '50px';
-                img.style.height = '50px';
-                img.style.textAlign = 'center';
-                img.setAttribute('src', "wvekk.png");
-            }
-
-            else {
+            if (Source.value != '' || Destination != '') {
                 var des;
                 var sour;
                 var macdes;
                 var macsour;
                 var port;
-                if (Source.value == "" ) {
-                    var img = document.querySelector('img');
-                    img.style.width = '50px';
-                    img.style.height = '50px';
-                    img.style.textAlign = 'center';
-                    img.setAttribute('src', "wvekk.png");
-                }
-                else if (Destination == "") {
-                    var img = document.querySelector('img');
-                    img.style.width = '50px';
-                    img.style.height = '50px';
-                    img.style.textAlign = 'center';
-                    img.setAttribute('src', "wvekk.png");
-                }
-                else {
+                if (Destination.value != "" && Source.value != "") {
                     if (Source.value == pca.value && Destination.value == pca.value) {
                         des = Destination.value;
                         sour = Source.value;
@@ -245,6 +223,23 @@
 
                 }
 
+                else {
+                    var img = document.querySelector('img');
+                    img.style.width = '50px';
+                    img.style.height = '50px';
+                    img.style.textAlign = 'center';
+                    img.setAttribute('src', "wvekk.png");
+
+                }
+
+            }
+            else {
+                var img = document.querySelector('img');
+                img.style.width = '50px';
+                img.style.height = '50px';
+                img.style.textAlign = 'center';
+                img.setAttribute('src', "wvekk.png");
+                
             }
         }
     </script>
